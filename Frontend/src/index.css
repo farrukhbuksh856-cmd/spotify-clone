@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-spotify-green: #1db954;
+    --color-spotify-green-hover: #1ed760;
+    --color-spotify-black: #000000;
+    --color-spotify-dark: #121212;
+    --color-spotify-card: #181818;
+    --color-spotify-card-hover: #282828;
+    --color-spotify-subtle: #b3b3b3;
+  }
+
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+  }
+}
+
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #3e3e3e;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #606060;
+}
+
+/* Range input styling for volume and seek bar */
+input[type="range"] {
+  accent-color: #1db954;
+  cursor: pointer;
+}
+
+/* Range thumb — make it appear only on hover for seek bar */
+input[type="range"].seek-bar::-webkit-slider-thumb {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+input[type="range"].seek-bar:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+/* Waveform bars animation */
+@keyframes wave1 { 0%,100%{height:30%} 50%{height:100%} }
+@keyframes wave2 { 0%,100%{height:60%} 50%{height:30%} }
+@keyframes wave3 { 0%,100%{height:80%} 50%{height:50%} }
+
+.wave-bar-1 { animation: wave1 0.9s ease-in-out infinite; }
+.wave-bar-2 { animation: wave2 0.9s ease-in-out infinite 0.2s; }
+.wave-bar-3 { animation: wave3 0.9s ease-in-out infinite 0.1s; }
+
+/* Smooth page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 250ms, transform 250ms;
+}
+
+/* Album card hover play button */
+.album-card:hover .play-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+.play-overlay {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Glassmorphism effect for player */
+.player-glass {
+  background: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #1db954, #1ed760);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pulse glow for playing indicator */
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(29,185,84,0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(29,185,84,0); }
+}
+.pulse-green {
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* Progress bar fill via CSS variable */
+input[type="range"].seek-bar {
+  --range-progress: 0%;
+}
+
