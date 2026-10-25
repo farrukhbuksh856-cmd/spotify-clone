@@ -1,17 +1,27 @@
-const {ImageKit} = require("@imagekit/nodejs")
+const { ImageKit } = require("@imagekit/nodejs");
 
-const ImageKitClient = new ImageKit({
-    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
-})
+let imageKitClient = null;
 
-async function uploadFile(file){
-    const result = await ImageKitClient.files.upload({
-        file,
-        fileName : "music_" + Date.now(),
-        folder: "yt-complete-backend/music"
-    })
-    return result;
-
+function getImageKitClient() {
+    if (!imageKitClient) {
+        if (!process.env.IMAGEKIT_PRIVATE_KEY) {
+            throw new Error("IMAGEKIT_PRIVATE_KEY environment variable is required to upload files.");
+        }
+        imageKitClient = new ImageKit({
+            privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+        });
+    }
+    return imageKitClient;
 }
 
-module.exports = {uploadFile}
+async function uploadFile(file) {
+    const client = getImageKitClient();
+    const result = await client.files.upload({
+        file,
+        fileName: "music_" + Date.now(),
+        folder: "yt-complete-backend/music"
+    });
+    return result;
+}
+
+module.exports = { uploadFile };

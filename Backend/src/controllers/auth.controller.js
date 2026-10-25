@@ -27,58 +27,84 @@ async function registerUser(req,res){
         role
     })
 
-    const token = jwt.sign({
-        id:user._id,
-        role:user.role,
-    },process.env.JWT_SECRET )
+    const isProduction = process.env.NODE_ENV === "production";
+    const cookieOptions = {
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax"
+    };
 
-    res.cookie("token",token)
+    const token = jwt.sign({
+        id: user._id,
+        role: user.role,
+    }, process.env.JWT_SECRET);
+
+    res.cookie("token", token, cookieOptions);
 
     res.status(201).json({
-        message:"User registered successfully",
-        user:{
-            id:user._id,
-            username:user.username,
-            email:user.email,
-            role:user.role,
+        message: "User registered successfully",
+        token,
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role,
         }
-    })
+    });
 }
 
-async function loginUser(req , res){
-    const {username,email,password}=req.body;
+async function loginUser(req, res) {
+    const { username, email, password } = req.body;
 
     const user = await userModel.findOne({
-        
-        $or:[
-            {username},
-            {email}
+        $or: [
+            { username },
+            { email }
         ]
-    })
-    if (!user){
-        return res.status(401).json({message:"Invalid credentials"})
+    });
+    if (!user) {
+        return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({
-        id:user._id,
-        role:user.role,
-    },process.env.JWT_SECRET)
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+        return res.status(401).json({ message: "Invalid credentials" });
+    }
 
-    res.cookie("token",token)
+    const isProduction = process.env.NODE_ENV === "production";
+    const cookieOptions = {
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax"
+    };
+
+    const token = jwt.sign({
+        id: user._id,
+        role: user.role,
+    }, process.env.JWT_SECRET);
+
+    res.cookie("token", token, cookieOptions);
 
     res.status(200).json({
-        message:"User login successfully",
-        user:{
-            id:user._id,
-            username:user.username,
-            email:user.email,
-            role:user.role,
+        message: "User login successfully",
+        token,
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+            role: user.role,
         }
-    })
+    });
 }
-async function logoutUser(req,res){
-    res.clearCookie("token")
-    res.status(200).json({message:"User logout successfully"})
+
+async function logoutUser(req, res) {
+    const isProduction = process.env.NODE_ENV === "production";
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax"
+    });
+    res.status(200).json({ message: "User logout successfully" });
 }
 
 module.exports = {registerUser,loginUser,logoutUser}

@@ -1,0 +1,27 @@
+{
+  "name": "spotify-back-proj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm --prefix Backend install && npm --prefix Frontend install && npm --prefix Frontend run build",
+    "build:frontend": "npm --prefix Frontend run build",
+    "install:all": "npm --prefix Backend install && npm --prefix Frontend install",
+    "start": "node Backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farrukhbuksh856-cmd/spotify-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/farrukhbuksh856-cmd/spotify-clone/issues"
+  },
+  "homepage": "https://github.com/farrukhbuksh856-cmd/spotify-clone#readme",
+  "dependencies": {
+    "serverless-http": "^4.0.0"
+  }
+}

@@ -1,0 +1,20 @@
+[build]
+  command = "npm --prefix Backend install && npm --prefix Frontend install && npm --prefix Frontend run build"
+  publish = "Frontend/dist"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  included_files = ["Backend/**"]
+
+# API Proxy: Route all /api/* calls to Netlify serverless function
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# SPA Fallback: Route all other requests to index.html for React Router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
