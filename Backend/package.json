@@ -1,7 +1,7 @@
 {
-  "name": "spotify-back-proj",
+  "name": "musicly-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Musicly backend API server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

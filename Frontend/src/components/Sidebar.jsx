@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { usePlayer } from '../context/PlayerContext';
+import MusiclyLogo from './MusiclyLogo';
 
 export default function Sidebar() {
   const { user, logout } = useAuth();
@@ -121,12 +122,8 @@ export default function Sidebar() {
       {/* Mobile Top Bar */}
       <div className="md:hidden flex items-center justify-between px-4 py-3 bg-black border-b border-[#282828] shrink-0 z-30">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-[#1db954] flex items-center justify-center text-black font-bold shadow-md shadow-[#1db954]/20">
-            <svg className="w-4 h-4 fill-current text-black" viewBox="0 0 24 24">
-              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.434-5.308-1.758-8.793-.963-.335.077-.67-.133-.746-.467-.077-.334.132-.67.467-.746 3.808-.87 7.076-.496 9.722 1.122.294.18.386.563.207.847zm1.226-2.724c-.226.367-.707.483-1.074.257-2.688-1.652-6.785-2.131-9.965-1.166-.413.125-.848-.106-.973-.518-.125-.413.106-.848.518-.973 3.632-1.102 8.147-.568 11.237 1.328.367.226.483.707.257 1.072zm.136-2.836C14.71 8.906 8.5 8.705 4.908 9.796c-.503.153-1.033-.135-1.185-.638-.153-.503.135-1.033.638-1.185 4.123-1.252 10.985-1.02 15.176 1.468.453.269.602.855.333 1.308-.269.454-.855.601-1.308.333z" />
-            </svg>
-          </div>
-          <span className="text-lg font-bold tracking-tight text-white">Spotify</span>
+          <MusiclyLogo size="sm" />
+          <span className="text-lg font-bold tracking-tight text-white">Musicly</span>
         </div>
 
         <button
@@ -157,12 +154,8 @@ export default function Sidebar() {
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between pb-2 border-b border-[#282828]">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#1db954] flex items-center justify-center text-black font-bold">
-                <svg className="w-4 h-4 fill-current text-black" viewBox="0 0 24 24">
-                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.434-5.308-1.758-8.793-.963-.335.077-.67-.133-.746-.467-.077-.334.132-.67.467-.746 3.808-.87 7.076-.496 9.722 1.122.294.18.386.563.207.847zm1.226-2.724c-.226.367-.707.483-1.074.257-2.688-1.652-6.785-2.131-9.965-1.166-.413.125-.848-.106-.973-.518-.125-.413.106-.848.518-.973 3.632-1.102 8.147-.568 11.237 1.328.367.226.483.707.257 1.072zm.136-2.836C14.71 8.906 8.5 8.705 4.908 9.796c-.503.153-1.033-.135-1.185-.638-.153-.503.135-1.033.638-1.185 4.123-1.252 10.985-1.02 15.176 1.468.453.269.602.855.333 1.308-.269.454-.855.601-1.308.333z" />
-                </svg>
-              </div>
-              <span className="text-lg font-bold text-white">Menu</span>
+              <MusiclyLogo size="sm" />
+              <span className="text-lg font-bold text-white">Musicly</span>
             </div>
             <button
               onClick={() => setMobileOpen(false)}
@@ -188,12 +181,8 @@ export default function Sidebar() {
         <div className="flex flex-col gap-2">
           {/* Brand logo header */}
           <div className="flex items-center gap-3 px-4 py-3 mb-2">
-            <div className="w-9 h-9 rounded-full bg-[#1db954] flex items-center justify-center text-black font-bold shadow-md shadow-[#1db954]/20">
-              <svg className="w-5 h-5 fill-current text-black" viewBox="0 0 24 24">
-                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.434-5.308-1.758-8.793-.963-.335.077-.67-.133-.746-.467-.077-.334.132-.67.467-.746 3.808-.87 7.076-.496 9.722 1.122.294.18.386.563.207.847zm1.226-2.724c-.226.367-.707.483-1.074.257-2.688-1.652-6.785-2.131-9.965-1.166-.413.125-.848-.106-.973-.518-.125-.413.106-.848.518-.973 3.632-1.102 8.147-.568 11.237 1.328.367.226.483.707.257 1.072zm.136-2.836C14.71 8.906 8.5 8.705 4.908 9.796c-.503.153-1.033-.135-1.185-.638-.153-.503.135-1.033.638-1.185 4.123-1.252 10.985-1.02 15.176 1.468.453.269.602.855.333 1.308-.269.454-.855.601-1.308.333z" />
-              </svg>
-            </div>
-            <span className="text-xl font-bold tracking-tight text-white">Spotify</span>
+            <MusiclyLogo size="md" />
+            <span className="text-xl font-bold tracking-tight text-white">Musicly</span>
           </div>
 
           {renderNavLinks(false)}

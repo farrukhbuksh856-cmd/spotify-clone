@@ -2,13 +2,22 @@
 
 @layer base {
   :root {
-    --color-spotify-green: #1db954;
-    --color-spotify-green-hover: #1ed760;
-    --color-spotify-black: #000000;
-    --color-spotify-dark: #121212;
-    --color-spotify-card: #181818;
-    --color-spotify-card-hover: #282828;
-    --color-spotify-subtle: #b3b3b3;
+    --color-musicly-green: #1db954;
+    --color-musicly-green-hover: #1ed760;
+    --color-musicly-black: #000000;
+    --color-musicly-dark: #121212;
+    --color-musicly-card: #181818;
+    --color-musicly-card-hover: #282828;
+    --color-musicly-subtle: #b3b3b3;
+
+    /* Legacy aliases */
+    --color-spotify-green: var(--color-musicly-green);
+    --color-spotify-green-hover: var(--color-musicly-green-hover);
+    --color-spotify-black: var(--color-musicly-black);
+    --color-spotify-dark: var(--color-musicly-dark);
+    --color-spotify-card: var(--color-musicly-card);
+    --color-spotify-card-hover: var(--color-musicly-card-hover);
+    --color-spotify-subtle: var(--color-musicly-subtle);
   }
 
   body {

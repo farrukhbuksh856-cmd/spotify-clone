@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { PlayerProvider } from './context/PlayerContext';
@@ -27,18 +26,25 @@ function MainLayout() {
       <Sidebar />
 
       {/* Main Content Area */}
-      <main className="flex-1 min-h-0 bg-[#121212] m-2 md:ml-0 rounded-xl overflow-y-auto relative">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/albums" element={<AlbumsPage />} />
-          <Route path="/albums/:albumId" element={<AlbumDetailPage />} />
+      <main className="flex-1 min-h-0 bg-[#121212] m-2 md:ml-0 rounded-xl overflow-y-auto relative flex flex-col">
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/albums" element={<AlbumsPage />} />
+            <Route path="/albums/:albumId" element={<AlbumDetailPage />} />
 
-          {/* Artist Only Routes */}
-          <Route element={<ProtectedRoute artistOnly={true} />}>
-            <Route path="/upload" element={<UploadMusicPage />} />
-            <Route path="/create-album" element={<CreateAlbumPage />} />
-          </Route>
-        </Routes>
+            {/* Artist Only Routes */}
+            <Route element={<ProtectedRoute artistOnly={true} />}>
+              <Route path="/upload" element={<UploadMusicPage />} />
+              <Route path="/create-album" element={<CreateAlbumPage />} />
+            </Route>
+          </Routes>
+        </div>
+
+        {/* Global Footer */}
+        <footer className="py-4 px-6 text-center text-xs text-[#a0a0a0] border-t border-white/5 shrink-0">
+          Musicly - portfolio project by Farrukh. Not affiliated with Spotify.
+        </footer>
       </main>
 
       {/* Fixed Music Player Bar */}

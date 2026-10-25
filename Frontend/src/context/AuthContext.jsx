@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 import api from '../api/axios';
 
 const AuthContext = createContext();
@@ -6,7 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // Store authenticated user information ({ id, username, email, role })
   const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem('spotify_user');
+    const savedUser = localStorage.getItem('musicly_user') || localStorage.getItem('spotify_user');
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
       });
       const userData = response.data.user;
       setUser(userData);
-      localStorage.setItem('spotify_user', JSON.stringify(userData));
+      localStorage.setItem('musicly_user', JSON.stringify(userData));
       return { success: true };
     } catch (err) {
       const msg = err.response?.data?.message || 'Registration failed. Please try again.';
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
       });
       const userData = response.data.user;
       setUser(userData);
-      localStorage.setItem('spotify_user', JSON.stringify(userData));
+      localStorage.setItem('musicly_user', JSON.stringify(userData));
       return { success: true };
     } catch (err) {
       const msg = err.response?.data?.message || 'Invalid credentials. Please check your inputs.';
@@ -72,6 +72,7 @@ export const AuthProvider = ({ children }) => {
       console.warn('Logout API error:', err);
     } finally {
       setUser(null);
+      localStorage.removeItem('musicly_user');
       localStorage.removeItem('spotify_user');
       setLoading(false);
     }

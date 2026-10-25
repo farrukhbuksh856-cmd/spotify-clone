@@ -1,7 +1,7 @@
 {
-  "name": "spotify-back-proj",
+  "name": "musicly",
   "version": "1.0.0",
-  "description": "",
+  "description": "Musicly - A web music streaming portfolio project by Farrukh. Not affiliated with Spotify.",
   "main": "index.js",
   "scripts": {
     "build": "npm --prefix Backend install && npm --prefix Frontend install && npm --prefix Frontend run build",
